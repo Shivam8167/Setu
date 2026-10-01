@@ -1,0 +1,296 @@
+@import "tailwindcss";
+
+/* Class-based dark mode - Tailwind dark: utilities follow .dark class on html,
+   not the OS prefers-color-scheme media query. */
+@custom-variant dark (.dark &);
+
+/* Responsive breakpoints - real viewport media queries in rem */
+@custom-variant screen-420 (@media (min-width: 26.25rem));
+@custom-variant screen-sm (@media (min-width: 36rem));
+@custom-variant screen-lg (@media (min-width: 56rem));
+@custom-variant screen-xl (@media (min-width: 72rem));
+@custom-variant screen-1366 (@media (min-width: 85.375rem));
+@custom-variant screen-1440 (@media (min-width: 90rem));
+@custom-variant screen-2xl (@media (min-width: 96rem));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, Arial, Helvetica, sans-serif;
+}
+
+html {
+  font-size: clamp(13px, min(calc(9.5px + 0.4vw), calc(5px + 1.2vh)), 17px);
+}
+
+:root {
+  --chevron: #1F1F1F;
+  --avatar-bg: #DBEAFE;
+  --avatar-text: #0058CE;
+  --text-secondary: #383838;
+  --role-text: #6B7280;
+  --workspace-pill-border: #E5E7EB;
+  --search-bg: #F3F4F6;
+  --search-placeholder: #9CA3AF;
+  --kbd-border: #E5E7EB;
+  --icon-btn-bg: #F3F4F6;
+  --icon-btn-navy: #0B1B3B;
+  --accent-solid: #0B1B3B;
+  --notification-dot: #8FB4FF;
+  --divider: #E5E7EB;
+  --surface: #FFFFFF;
+  --sidebar-active: #0B1B3B;
+  --assistant-border: #C7CAFF;
+  --assistant-hover: #F1F3FF;
+  --assistant-sidebar-bg: #F7F8FC;
+  --assistant-panel-from: #EEF1FF;
+  --assistant-panel-via: #F1F6FF;
+  --assistant-panel-to: #FFFFFF;
+  --assistant-button-from: #F5F9FF;
+  --assistant-button-to: #CCE1FF;
+  --shell-bg: #FFFFFF;
+  --page-bg: #FFFFFF;
+  --surface-muted: #F3F4F6;
+  --status-healthy-fg: #17603A;
+  --status-healthy-bg: #E3F4EA;
+  --status-warning-fg: #7A4B00;
+  --status-warning-bg: #FDF3DC;
+  --status-critical-fg: #9B1C1C;
+  --status-critical-bg: #FDECEA;
+  --status-info-fg: #2A36A0;
+  --status-info-bg: #E8EBFB;
+  --status-neutral-fg: #4B5563;
+  --status-neutral-bg: #F3F4F6;
+  --kpi-products-value: #0051C3;
+  --kpi-workspaces-value: #007A3D;
+  --kpi-alerts-value: #C05500;
+  --kpi-features-value: #5B2D9C;
+  --chart-1: #2563EB;
+  --chart-2: #059669;
+  --chart-3: #D97706;
+  --chart-4: #DC2626;
+  --chart-5: #7C3AED;
+  --chart-6: #0891B2;
+  --card-border: transparent;
+  --card-radius: 0.75rem;
+  --card-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: 0 0.5rem 1.5rem rgba(15, 23, 42, 0.1);
+  --sidebar-w: 5.75rem;
+  --header-h: 4.5rem;
+  --text-heading: #0F172A;
+  --text-muted: #64748B;
+  --icon-chip-bg: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
+  --icon-chip-fg: #003FC9;
+  --trend-up-bg: #F0FDF4;
+  --trend-up-fg: #008236;
+  --trend-down-bg: #FEF2F2;
+  --trend-down-fg: #C10007;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.375rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.625rem;
+  --space-lg: 0.875rem;
+  --card-pad: 0.625rem;
+  --page-pad-x: 0.75rem;
+  --page-pad-y: 0.5rem;
+  --font-page-title: 1.3125rem;
+  --font-card-title: 1rem;
+  --font-body: 0.9375rem;
+  --font-caption: 0.8125rem;
+  --font-value-lg: 2.25rem;
+  --font-value-md: 1.125rem;
+}
+
+html, body { height: 100%; }
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar { display: none; }
+
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) { cursor: pointer; }
+
+button:disabled,
+[aria-disabled="true"] { cursor: not-allowed; }
+
+.font-mono-id {
+  font-family: ui-monospace, SFMono-Regular, "IBM Plex Mono", Menlo, monospace;
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-transition { animation: page-fade-in 0.25s ease-out; }
+
+@keyframes tap-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(0.93); }
+  100% { transform: scale(1); }
+}
+
+.tap-pop:active { animation: tap-pop 0.18s ease-out forwards; }
+
+/* ================================================================
+   DARK MODE
+   ================================================================ */
+.dark {
+  --background: #0B0F14;
+  --foreground: #E6EDF3;
+  --chevron: #E6EDF3;
+  --avatar-bg: #1D3461;
+  --avatar-text: #93C5FD;
+  --text-secondary: #C9D1D9;
+  --text-heading: #E6EDF3;
+  --text-muted: #8B949E;
+  --role-text: #8B949E;
+  --workspace-pill-border: #1E2633;
+  --search-bg: #1C232E;
+  --search-placeholder: #6E7681;
+  --kbd-border: #1E2633;
+  --icon-btn-bg: #141A22;
+  --icon-btn-navy: #93C5FD;
+  --accent-solid: #58A6FF;
+  --notification-dot: #58A6FF;
+  --divider: #1E2633;
+  --surface: #141A22;
+  --sidebar-active: #58A6FF;
+  --assistant-border: #3B4CCA;
+  --assistant-hover: #141A22;
+  --assistant-sidebar-bg: #0B0F14;
+  --assistant-panel-from: #0B0F14;
+  --assistant-panel-via: #0F141C;
+  --assistant-panel-to: #0B0F14;
+  --assistant-button-from: #141A22;
+  --assistant-button-to: #1D3461;
+  --shell-bg: #0B0F14;
+  --page-bg: #0B0F14;
+  --surface-muted: #0F141C;
+  --status-healthy-fg: #3FB950;
+  --status-healthy-bg: rgba(63, 185, 80, 0.12);
+  --status-warning-fg: #D29922;
+  --status-warning-bg: rgba(210, 153, 34, 0.12);
+  --status-critical-fg: #F85149;
+  --status-critical-bg: rgba(248, 81, 73, 0.12);
+  --status-info-fg: #79C0FF;
+  --status-info-bg: rgba(121, 192, 255, 0.12);
+  --status-neutral-fg: #8B949E;
+  --status-neutral-bg: rgba(139, 148, 158, 0.12);
+  --kpi-products-value: #79C0FF;
+  --kpi-workspaces-value: #3FB950;
+  --kpi-alerts-value: #D29922;
+  --kpi-features-value: #A78BFA;
+  --chart-1: #60A5FA;
+  --chart-2: #34D399;
+  --chart-3: #FBBF24;
+  --chart-4: #F87171;
+  --chart-5: #A78BFA;
+  --chart-6: #22D3EE;
+  --card-border: #1E2633;
+  --card-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.5);
+  --card-shadow-hover: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.6);
+  --icon-chip-bg: linear-gradient(135deg, rgba(96, 165, 250, 0.15) 0%, rgba(96, 165, 250, 0.07) 100%);
+  --icon-chip-fg: #93C5FD;
+  --trend-up-bg: rgba(63, 185, 80, 0.12);
+  --trend-up-fg: #3FB950;
+  --trend-down-bg: rgba(248, 81, 73, 0.12);
+  --trend-down-fg: #F85149;
+}
+
+/* Product logo theme visibility rules */
+html.dark .product-logo-light {
+  display: none !important;
+}
+html.dark .product-logo-dark {
+  display: inline-block !important;
+}
+html:not(.dark) .product-logo-dark {
+  display: none !important;
+}
+html:not(.dark) .product-logo-light {
+  display: inline-block !important;
+}
+
+/* ================================================================
+   METADATA BADGES & PILLS (Availability, Plan, Environment, Tiers)
+   ================================================================ */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  background-color: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
+  white-space: nowrap;
+  transition: all 0.15s ease-in-out;
+}
+
+.badge-pill-sm {
+  border-radius: 0.25rem;
+  padding: 0.0625rem 0.375rem;
+  font-size: 0.625rem;
+  line-height: 0.875rem;
+}
+
+html.dark .badge-pill {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #E2E8F0 !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Plan badges */
+.badge-plan {
+  background-color: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
+}
+html.dark .badge-plan {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #E2E8F0 !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Availability badges */
+.badge-avail {
+  background-color: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
+}
+html.dark .badge-avail {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #E2E8F0 !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+/* Environment badges */
+.badge-env {
+  background-color: #F1F5F9;
+  color: #334155;
+  border: 1px solid #CBD5E1;
+}
+html.dark .badge-env {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #E2E8F0 !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
